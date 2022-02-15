@@ -6,7 +6,7 @@ import Data.List
 
 qsort :: Ord a => [a] -> [a]
 qsort [] = []
-qsort (x:xs) = qsort lhs ++ [x] ++ rhs
+qsort (x:xs) = qsort lhs ++ [x] ++ qsort rhs
   where
       lhs = [e | e <- xs, e < x]
       rhs = [e | e <- xs, e >= x]
@@ -24,8 +24,7 @@ prop_minimum xs = not (null xs)
 prop_model :: Ord a => [a] -> Bool
 prop_model xs = qsort xs == sort xs
 
--- $> quickCheck prop_idempotencia
--- $> quickCheck prop_length
+-- $> quickCheck prop_minimum
 
 main :: IO ()
 main = do
